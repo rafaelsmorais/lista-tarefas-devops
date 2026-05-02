@@ -97,10 +97,3 @@ Exemplo:
 git checkout -b develop
 git checkout -b feature/crud-tarefas
 ```
-
-## Integrantes da equipe
-
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
