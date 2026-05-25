@@ -1,4 +1,4 @@
-# Projeto Final DevOps - Todo App
+# Projeto Final DevOps - Lista de Tarefas
 
 Aplicacao web de lista de tarefas criada para a disciplina de DevOps. O projeto possui front-end, back-end e banco de dados executando com Docker Compose.
 
@@ -21,6 +21,8 @@ Permitir o gerenciamento de tarefas por meio de um CRUD completo:
 - SQLite
 - Docker
 - Docker Compose
+- GitHub Actions
+- SonarCloud
 
 ## Estrutura do projeto
 
@@ -29,7 +31,9 @@ Permitir o gerenciamento de tarefas por meio de um CRUD completo:
 ├── backend/                 # API Node.js com Express e SQLite
 ├── database/                # Container de inicializacao do SQLite
 ├── frontend/                # Aplicacao React com Vite
+├── .github/workflows/       # Pipeline de integracao continua
 ├── docker-compose.yml       # Orquestracao dos servicos
+├── sonar-project.properties # Configuracao do SonarCloud
 └── README.md
 ```
 
@@ -43,9 +47,9 @@ docker compose up --build
 
 Acessos:
 
-- Front-end: http://localhost:8080
-- Back-end: http://localhost:3000
-- Health check da API: http://localhost:3000/health
+- Front-end: <http://localhost:8080>
+- Back-end: <http://localhost:3000>
+- Health check da API: <http://localhost:3000/health>
 
 Parar os servicos:
 
@@ -69,6 +73,7 @@ npm install
 npm run dev
 npm run build
 npm run lint
+npm test
 ```
 
 Frontend:
@@ -79,7 +84,20 @@ npm install
 npm run dev
 npm run build
 npm run lint
+npm test
 ```
+
+## Pipeline e qualidade
+
+O projeto utiliza GitHub Actions para executar automaticamente:
+
+- instalacao das dependencias;
+- lint do backend e frontend;
+- testes;
+- build do backend e frontend;
+- validacao do `docker-compose.yml`;
+- build dos containers;
+- analise de qualidade no SonarCloud.
 
 ## GitFlow
 
