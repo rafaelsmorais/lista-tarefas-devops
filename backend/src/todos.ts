@@ -1,19 +1,8 @@
 import { Router } from 'express';
-import { z } from 'zod';
 import { db } from './database.js';
+import { createTodoSchema, updateTodoSchema } from './todoValidation.js';
 
 const router = Router();
-
-const createTodoSchema = z.object({
-  title: z.string().trim().min(1, 'Titulo e obrigatorio'),
-  description: z.string().trim().optional().default('')
-});
-
-const updateTodoSchema = z.object({
-  title: z.string().trim().min(1, 'Titulo e obrigatorio').optional(),
-  description: z.string().trim().optional(),
-  completed: z.boolean().optional()
-});
 
 type TodoRow = {
   id: number;

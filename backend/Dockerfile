@@ -3,7 +3,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci --no-audit
 
 COPY tsconfig.json eslint.config.js ./
 COPY src ./src
@@ -15,7 +15,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY package*.json ./
-RUN npm install --omit=dev
+RUN npm ci --omit=dev --no-audit
 
 COPY --from=build /app/dist ./dist
 

@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+      - 'release/**'
+      - 'hotfix/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-test-quality:
+    name: Build, testes e qualidade
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+
+      - name: Instalar dependencias do backend
+        working-directory: backend
+        run: npm ci --no-audit
+
+      - name: Instalar dependencias do frontend
+        working-directory: frontend
+        run: npm ci --no-audit
+
+      - name: Lint do backend
+        working-directory: backend
+        run: npm run lint
+
+      - name: Lint do frontend
+        working-directory: frontend
+        run: npm run lint
+
+      - name: Testes do backend
+        working-directory: backend
+        run: npm test
+
+      - name: Testes do frontend
+        working-directory: frontend
+        run: npm test
+
+      - name: Build do backend
+        working-directory: backend
+        run: npm run build
+
+      - name: Build do frontend
+        working-directory: frontend
+        run: npm run build
+
+      - name: Validar Docker Compose
+        run: docker compose config
+
+      - name: Build dos containers
+        run: docker compose build
+
+      - name: Analise no SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
