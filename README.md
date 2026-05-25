@@ -1,4 +1,4 @@
-# Projeto Final DevOps - Todo App
+# Projeto Final DevOps - Lista de Tarefas
 
 Aplicacao web de lista de tarefas criada para a disciplina de DevOps. O projeto possui front-end, back-end e banco de dados executando com Docker Compose.
 
@@ -47,9 +47,9 @@ docker compose up --build
 
 Acessos:
 
-- Front-end: http://localhost:8080
-- Back-end: http://localhost:3000
-- Health check da API: http://localhost:3000/health
+- Front-end: <http://localhost:8080>
+- Back-end: <http://localhost:3000>
+- Health check da API: <http://localhost:3000/health>
 
 Parar os servicos:
 
@@ -98,8 +98,6 @@ O projeto utiliza GitHub Actions para executar automaticamente:
 - validacao do `docker-compose.yml`;
 - build dos containers;
 - analise de qualidade no SonarCloud.
-
-Para usar o SonarCloud, crie o projeto na organizacao `rafaelsmorais` e cadastre no GitHub o secret `SONAR_TOKEN` com o token gerado no SonarCloud.
 
 ## GitFlow
 
