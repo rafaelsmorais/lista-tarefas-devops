@@ -1,5 +1,4 @@
-import assert from 'node:assert/strict';
-import { describe, it } from 'node:test';
+import { describe, expect, it } from 'vitest';
 import { createTodoSchema, updateTodoSchema } from './todoValidation.js';
 
 describe('validacao de tarefas', () => {
@@ -9,7 +8,7 @@ describe('validacao de tarefas', () => {
       description: 'Subir os containers com Compose'
     });
 
-    assert.equal(result.success, true);
+    expect(result.success).toBe(true);
   });
 
   it('rejeita tarefa sem titulo', () => {
@@ -18,7 +17,7 @@ describe('validacao de tarefas', () => {
       description: 'Descricao sem titulo'
     });
 
-    assert.equal(result.success, false);
+    expect(result.success).toBe(false);
   });
 
   it('aceita atualizacao apenas do status', () => {
@@ -26,6 +25,6 @@ describe('validacao de tarefas', () => {
       completed: true
     });
 
-    assert.equal(result.success, true);
+    expect(result.success).toBe(true);
   });
 });

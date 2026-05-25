@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-audit
 
-COPY tsconfig.json eslint.config.js ./
+COPY tsconfig.json tsconfig.eslint.json eslint.config.js vitest.config.ts ./
 COPY src ./src
 RUN npm run build
 
